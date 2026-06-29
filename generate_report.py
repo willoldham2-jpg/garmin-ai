@@ -108,8 +108,7 @@ def send_email(report: str, resend_key: str, to_email: str):
         urllib.request.urlopen(req)
         print(f"Report emailed to {to_email}")
     except urllib.error.HTTPError as e:
-        print(f"Resend error {e.code}: {e.read().decode()}")
-        raise
+        print(f"Resend error {e.code}: {e.read().decode()} — email skipped")
 
 
 def main():
@@ -130,7 +129,15 @@ def main():
     report = call_claude(wellness, activities, api_key)
     print(report)
 
-    send_email(report, resend_key, to_email)
+    # Save report to file in repo
+    report_dir = garmin_dir / "reports"
+    report_dir.mkdir(parents=True, exist_ok=True)
+    report_file = report_dir / f"{date.today().isoformat()}.md"
+    report_file.write_text(report)
+    print(f"Report saved to {report_file}")
+
+    if resend_key:
+        send_email(report, resend_key, to_email)
 
 
 if __name__ == "__main__":
