@@ -13,7 +13,7 @@
     },
     "2026-06-28": {
       "resting_hr": 53.0,
-      "steps": 13166,
+      "steps": 13722,
       "stress_avg": 20,
       "body_battery_high": 100,
       "body_battery_low": 34,
@@ -224,15 +224,15 @@
       "endTimeGMT": "2026-06-28 17:05:51",
       "qualifyingDive": false,
       "activityUUID": "7393c52f-6ede-4164-9c8a-d66e08ac9953",
-      "pr": true,
+      "elevationCorrected": true,
+      "atpActivity": false,
+      "autoCalcCalories": false,
       "purposeful": false,
       "favorite": false,
-      "parent": false,
       "decoDive": false,
-      "manualActivity": false,
-      "autoCalcCalories": false,
-      "elevationCorrected": true,
-      "atpActivity": false
+      "pr": true,
+      "parent": false,
+      "manualActivity": false
     }
   ]
 }
