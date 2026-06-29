@@ -1,0 +1,15 @@
+# Garmin token — never commit this
+.garminconnect
+garmin_tokens.json
+
+# Output data — local only
+garmin/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Env files
+.env
