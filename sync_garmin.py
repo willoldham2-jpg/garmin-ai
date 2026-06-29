@@ -31,6 +31,10 @@ def get_client():
     else:
         sys.exit("Not logged in. Run with --login first.")
 
+    # Fetch display name required by stats endpoints
+    profile = client.get_user_profile()
+    client.display_name = profile.get("displayName") or profile.get("userName", "")
+
     return client
 
 
