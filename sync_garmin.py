@@ -24,12 +24,10 @@ def get_client():
         token_data = json.loads(base64.b64decode(token_b64))
         client = garminconnect.Garmin(email, password)
         client.client.loads(token_data)
-        client.display_name = client.client.username
     elif TOKEN_PATH.exists():
         token_data = json.loads(TOKEN_PATH.read_text())
         client = garminconnect.Garmin(email, password)
         client.client.loads(token_data)
-        client.display_name = client.client.username
     else:
         sys.exit("Not logged in. Run with --login first.")
 
