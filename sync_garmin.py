@@ -20,13 +20,14 @@ def get_client():
     password = os.environ.get("GARMIN_PASSWORD", "")
     token_b64 = os.environ.get("GARMIN_TOKEN_B64", "")
 
-    client = garminconnect.Garmin(email, password)
-
     if token_b64:
         token_data = json.loads(base64.b64decode(token_b64))
-        client.garth.loads(token_data)
+        client = garminconnect.Garmin(email, password)
+        client.client.loads(token_data)
     elif TOKEN_PATH.exists():
-        client.garth.loads(json.loads(TOKEN_PATH.read_text()))
+        token_data = json.loads(TOKEN_PATH.read_text())
+        client = garminconnect.Garmin(email, password)
+        client.client.loads(token_data)
     else:
         sys.exit("Not logged in. Run with --login first.")
 
@@ -42,7 +43,7 @@ def do_login():
     client = garminconnect.Garmin(email, password)
     client.login()
 
-    token_data = client.garth.dumps()
+    token_data = client.client.dumps()
     TOKEN_PATH.write_text(json.dumps(token_data))
 
     b64 = base64.b64encode(json.dumps(token_data).encode()).decode()
