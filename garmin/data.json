@@ -206,13 +206,13 @@
       "activityUUID": "7393c52f-6ede-4164-9c8a-d66e08ac9953",
       "autoCalcCalories": false,
       "favorite": false,
-      "purposeful": false,
-      "manualActivity": false,
       "pr": true,
+      "decoDive": false,
       "elevationCorrected": true,
       "atpActivity": false,
-      "decoDive": false,
-      "parent": false
+      "parent": false,
+      "purposeful": false,
+      "manualActivity": false
     }
   ]
 }
