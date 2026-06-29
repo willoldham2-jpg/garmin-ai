@@ -90,6 +90,7 @@ def send_email(report: str, resend_key: str, to_email: str):
     today = date.today().isoformat()
     body = json.dumps({
         "from": "Garmin Coach <onboarding@resend.dev>",
+        "reply_to": to_email,
         "to": [to_email],
         "subject": f"Your training report — {today}",
         "text": report,
@@ -103,8 +104,12 @@ def send_email(report: str, resend_key: str, to_email: str):
             "Authorization": f"Bearer {resend_key}",
         }
     )
-    urllib.request.urlopen(req)
-    print(f"Report emailed to {to_email}")
+    try:
+        urllib.request.urlopen(req)
+        print(f"Report emailed to {to_email}")
+    except urllib.error.HTTPError as e:
+        print(f"Resend error {e.code}: {e.read().decode()}")
+        raise
 
 
 def main():
