@@ -2,9 +2,6 @@
 .garminconnect
 garmin_tokens.json
 
-# Output data — local only
-garmin/
-
 # Python
 __pycache__/
 *.py[cod]
