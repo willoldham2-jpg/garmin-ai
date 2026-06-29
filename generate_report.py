@@ -84,43 +84,32 @@ Keep the report concise — under 300 words. Write it like a coach texting an at
     return data["content"][0]["text"]
 
 
-def send_email(report: str, resend_key: str, to_email: str):
-    import urllib.request
+def send_email(report: str, gmail_password: str, to_email: str):
+    import smtplib
+    from email.mime.text import MIMEText
 
     today = date.today().isoformat()
-    body = json.dumps({
-        "from": "Garmin Coach <onboarding@resend.dev>",
-        "reply_to": to_email,
-        "to": [to_email],
-        "subject": f"Your training report — {today}",
-        "text": report,
-    }).encode()
+    msg = MIMEText(report)
+    msg["Subject"] = f"Your training report — {today}"
+    msg["From"] = to_email
+    msg["To"] = to_email
 
-    req = urllib.request.Request(
-        "https://api.resend.com/emails",
-        data=body,
-        headers={
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {resend_key}",
-        }
-    )
-    try:
-        urllib.request.urlopen(req)
-        print(f"Report emailed to {to_email}")
-    except urllib.error.HTTPError as e:
-        print(f"Resend error {e.code}: {e.read().decode()} — email skipped")
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+        server.login(to_email, gmail_password)
+        server.send_message(msg)
+    print(f"Report emailed to {to_email}")
 
 
 def main():
     api_key = os.environ.get("ANTHROPIC_API_KEY", "")
-    resend_key = os.environ.get("RESEND_API_KEY", "")
+    gmail_password = os.environ.get("GMAIL_APP_PASSWORD", "")
     to_email = os.environ.get("REPORT_EMAIL", "will.oldham2@gmail.com")
     garmin_dir = Path(os.environ.get("GARMIN_OUT", "garmin"))
 
     if not api_key:
         sys.exit("Set ANTHROPIC_API_KEY")
-    if not resend_key:
-        sys.exit("Set RESEND_API_KEY")
+    if not gmail_password:
+        sys.exit("Set GMAIL_APP_PASSWORD")
 
     wellness = load_wellness(garmin_dir)
     activities = load_recent_activities(garmin_dir)
@@ -136,8 +125,7 @@ def main():
     report_file.write_text(report)
     print(f"Report saved to {report_file}")
 
-    if resend_key:
-        send_email(report, resend_key, to_email)
+    send_email(report, gmail_password, to_email)
 
 
 if __name__ == "__main__":
