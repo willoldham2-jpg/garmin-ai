@@ -81,7 +81,9 @@ def fetch_wellness(client, day: date) -> dict:
     try:
         hrv = client.get_hrv_data(ds)
         summary = hrv.get("hrvSummary", {})
-        data["hrv"] = summary.get("lastNight")
+        data["hrv"] = summary.get("lastNightAvg")
+        data["hrv_weekly_avg"] = summary.get("weeklyAvg")
+        data["hrv_status"] = summary.get("status")
     except Exception:
         pass
 
@@ -103,7 +105,12 @@ def wellness_to_md(day: date, w: dict) -> str:
     if w.get("resting_hr"):
         lines.append(f"- Resting HR: {w['resting_hr']} bpm")
     if w.get("hrv"):
-        lines.append(f"- HRV (overnight): {w['hrv']} ms")
+        hrv_line = f"- HRV (last night): {w['hrv']} ms"
+        if w.get("hrv_weekly_avg"):
+            hrv_line += f" (7-day avg: {w['hrv_weekly_avg']} ms)"
+        if w.get("hrv_status"):
+            hrv_line += f" — {w['hrv_status'].replace('_', ' ').title()}"
+        lines.append(hrv_line)
     if w.get("sleep_seconds"):
         hours = round(w["sleep_seconds"] / 3600, 1)
         score = w.get("sleep_score", "?")
