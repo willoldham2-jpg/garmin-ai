@@ -1,4 +1,4 @@
-# So that was actual death — 2026-06-28
+# So that was actual death â€” 2026-06-28
 - Type: running
 - Duration: 31 min
 - Distance: 5.64 km

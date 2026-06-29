@@ -1,19 +1,39 @@
 {
   "wellness": {
     "2026-06-29": {
+      "steps": null,
+      "stress_avg": null,
+      "body_battery_high": null,
+      "body_battery_low": null,
       "sleep_seconds": null,
       "sleep_score": null,
-      "hrv": null
+      "hrv": null,
+      "hrv_weekly_avg": null,
+      "hrv_status": null
     },
     "2026-06-28": {
+      "resting_hr": 53.0,
+      "steps": 13166,
+      "stress_avg": 20,
+      "body_battery_high": 100,
+      "body_battery_low": 34,
       "sleep_seconds": 29444,
       "sleep_score": 96,
-      "hrv": null
+      "hrv": 64,
+      "hrv_weekly_avg": 55,
+      "hrv_status": "BALANCED"
     },
     "2026-06-27": {
+      "resting_hr": 59.0,
+      "steps": 16,
+      "stress_avg": 12,
+      "body_battery_high": 60,
+      "body_battery_low": 20,
       "sleep_seconds": null,
       "sleep_score": null,
-      "hrv": null
+      "hrv": null,
+      "hrv_weekly_avg": 54,
+      "hrv_status": "BALANCED"
     }
   },
   "activities": [
@@ -204,15 +224,15 @@
       "endTimeGMT": "2026-06-28 17:05:51",
       "qualifyingDive": false,
       "activityUUID": "7393c52f-6ede-4164-9c8a-d66e08ac9953",
-      "autoCalcCalories": false,
-      "favorite": false,
       "pr": true,
-      "decoDive": false,
-      "elevationCorrected": true,
-      "atpActivity": false,
-      "parent": false,
       "purposeful": false,
-      "manualActivity": false
+      "favorite": false,
+      "parent": false,
+      "decoDive": false,
+      "manualActivity": false,
+      "autoCalcCalories": false,
+      "elevationCorrected": true,
+      "atpActivity": false
     }
   ]
 }
