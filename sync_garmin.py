@@ -32,8 +32,8 @@ def get_client():
         sys.exit("Not logged in. Run with --login first.")
 
     # Fetch display name required by stats endpoints
-    profile = client.get_user_profile()
-    client.display_name = profile.get("displayName") or profile.get("userName", "")
+    settings = client.get_userprofile_settings()
+    client.display_name = settings.get("displayName", "")
 
     return client
 
@@ -61,8 +61,16 @@ def fetch_wellness(client, day: date) -> dict:
     data = {}
 
     try:
+        rhr = client.get_rhr_day(ds)
+        metrics = rhr.get("allMetrics", {}).get("metricsMap", {})
+        rhr_list = metrics.get("WELLNESS_RESTING_HEART_RATE", [])
+        if rhr_list:
+            data["resting_hr"] = rhr_list[0].get("value")
+    except Exception:
+        pass
+
+    try:
         stats = client.get_stats(ds)
-        data["resting_hr"] = stats.get("restingHeartRate")
         data["steps"] = stats.get("totalSteps")
         data["stress_avg"] = stats.get("averageStressLevel")
         data["body_battery_high"] = stats.get("bodyBatteryHighestValue")
@@ -103,7 +111,7 @@ def wellness_to_md(day: date, w: dict) -> str:
     lines = [f"# Garmin wellness {day.isoformat()}"]
 
     if w.get("resting_hr"):
-        lines.append(f"- Resting HR: {w['resting_hr']} bpm")
+        lines.append(f"- Resting HR: {int(w['resting_hr'])} bpm")
     if w.get("hrv"):
         hrv_line = f"- HRV (last night): {w['hrv']} ms"
         if w.get("hrv_weekly_avg"):
