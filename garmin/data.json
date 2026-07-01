@@ -2,8 +2,8 @@
   "wellness": {
     "2026-07-01": {
       "resting_hr": 56.0,
-      "steps": 276,
-      "stress_avg": 16,
+      "steps": 2290,
+      "stress_avg": 23,
       "body_battery_high": 76,
       "body_battery_low": 15,
       "sleep_seconds": 33056,
@@ -158,15 +158,15 @@
       "endTimeGMT": "2026-06-30 22:30:23",
       "qualifyingDive": false,
       "activityUUID": "c8b7329f-f2ec-4479-8d8a-89c9294f1164",
-      "decoDive": false,
-      "purposeful": false,
-      "manualActivity": false,
       "autoCalcCalories": false,
+      "parent": false,
+      "pr": false,
+      "decoDive": false,
+      "favorite": false,
+      "purposeful": false,
       "elevationCorrected": true,
       "atpActivity": false,
-      "favorite": false,
-      "pr": false,
-      "parent": false
+      "manualActivity": false
     },
     {
       "activityId": 23420636153,
@@ -283,15 +283,15 @@
       "endTimeGMT": "2026-06-29 17:27:01",
       "qualifyingDive": false,
       "activityUUID": "2b580e97-56fc-47a7-80c6-526c2098b48d",
-      "pr": false,
       "purposeful": false,
+      "pr": false,
+      "favorite": false,
       "manualActivity": false,
+      "parent": false,
+      "decoDive": false,
       "autoCalcCalories": false,
       "elevationCorrected": false,
-      "atpActivity": false,
-      "favorite": false,
-      "decoDive": false,
-      "parent": false
+      "atpActivity": false
     },
     {
       "activityId": 23420071361,
@@ -437,15 +437,15 @@
       "endTimeGMT": "2026-06-29 16:43:06",
       "qualifyingDive": false,
       "activityUUID": "5511fab9-e322-4b63-9295-2e1a477de37a",
-      "pr": false,
       "purposeful": false,
+      "pr": false,
+      "favorite": false,
       "manualActivity": false,
+      "parent": false,
+      "decoDive": false,
       "autoCalcCalories": false,
       "elevationCorrected": false,
-      "atpActivity": false,
-      "favorite": false,
-      "decoDive": false,
-      "parent": false
+      "atpActivity": false
     }
   ]
 }
